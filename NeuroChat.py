@@ -55,7 +55,7 @@ First_Time = True
 Finished = False
 
 
-def scheiße_entfernen(s: str, prefix: str) -> str:
+def scheiße_entfernen(s: str) -> str:
     chat_token = f"{Prefix}chat"
     if s.startswith(chat_token):
         s = s[len(chat_token):].lstrip()
