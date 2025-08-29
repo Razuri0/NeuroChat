@@ -55,12 +55,16 @@ First_Time = True
 Finished = False
 
 
-def scheiße_entfernen(s: str) -> str:
-    if s.startswith(f"{Prefix}chat"):
-        s = s[5:].lstrip()
+def scheisse_entfernen(s: str, prefix: str) -> str:
+    chat_token = f"{Prefix}chat"
+    if s.startswith(chat_token):
+        s = s[len(chat_token):].lstrip()
     else:
-        s = s[:s.rfind("\nAI Cost:")].rstrip()
+        idx = s.rfind("\nAI Cost:")
+        if idx != -1:
+            s = s[:idx].rstrip()
     return s
+
 
 
 def uwufy(text) -> str:
