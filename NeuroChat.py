@@ -1,5 +1,4 @@
 from utils.GPT_Bot_Framework import GPT_completion
-# from youtube_scraper import video_info
 import discord
 from discord.ext import commands, tasks
 from utils.youtube_downloader import yt_downloader
@@ -13,7 +12,6 @@ from datetime import datetime
 from gtts import gTTS
 import os
 from datetime import datetime, timedelta
-# pip install discord.py yt_dlp openai google-api-python-client google-auth-httplib2 google-auth-oauthlib PyNaCl ffmpeg-python ai21 --upgrade
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Prefix = "%"
@@ -421,7 +419,6 @@ async def ow(ctx, Klasse):
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---Music bot---
-# loop = asyncio.get_event_loop()
 
 
 @client.command()
@@ -458,8 +455,6 @@ async def bass(ctx, level_in=bass_level):
 
 @client.command()
 async def play(ctx, url="", n=1):
-    # if url.endswith(&feature=youtu.be):
-    #    url = url[:url.rfind("&feature=youtu.be")].rstrip()
     global songs
     global currently_playing
     try:
@@ -510,7 +505,6 @@ async def downloader(url, format="bestaudio", path="Queue_Download/%(title)s.%(e
 async def queue(ctx):
     global now_playing_message_id
     if now_playing_message_id:
-        # channel = await ctx.client.fetch_channel(now_playing_channel_id)
         message = await ctx.channel.fetch_message(now_playing_message_id)
         # Delete the message
         now_playing_message_id = False
@@ -655,23 +649,6 @@ async def gay(ctx, n=1):
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---Chat-GPT---
-
-
-"""@client.command()
-async def AI_model(ctx, model="Jurassic-2"):
-    global AI
-    try:
-        if model == "Jurassic-2":
-            AI = "Jurassic-2"
-            await ctx.reply("AI model set to Jurassic-2")
-        elif model == "GPT-3.5-turbo":
-            AI = "GPT-3.5-turbo"
-            await ctx.reply("AI model set to GPT-3.5-turbo")
-        else:
-            await ctx.reply("pls choose a valid AI model (Jurassic-2 or GPT-3.5-turbo)")
-    except:
-        await ctx.reply("&AI_model (str) to set used AI model (Jurassic-2 or GPT-3.5-turbo)")"""
-
 
 @client.command()
 async def settings(ctx, *, args=""):
