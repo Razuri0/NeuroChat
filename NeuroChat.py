@@ -423,7 +423,7 @@ async def ow(ctx, Klasse):
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---Music bot---
-
+"""
 
 @client.command()
 async def volume(ctx, level_in):
@@ -577,7 +577,7 @@ async def pause(ctx):
         await ctx.reply("no song currently playing")
 
 
-"""
+
 @client.command()
 async def disconnect(ctx, yes_no):
     global auto_disconnect
@@ -589,7 +589,7 @@ async def disconnect(ctx, yes_no):
     except:
         await ctx.reply("&disconnect (y/n) to set the auto disconnect after the music queue finished")
     await ctx.reply(f" auto disconnect set to {auto_disconnect}")
-"""
+
 
 
 @client.command()
@@ -650,6 +650,10 @@ async def gay(ctx, n=1):
     except:
         await ctx.reply("&gay (n) to play gay")
 
+
+
+
+"""
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---Chat-GPT---
