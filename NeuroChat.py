@@ -32,7 +32,6 @@ AI = "gpt-5-nano"
 Bot_Name = "NeuroChat"
 # GPT settings
 n, temperature, model, max_Tokens = 1, 0.8, AI, 2000
-# Jurassic-2 settings
 
 pre_prompt_main = [{"role": "user", "content": f"You are {Bot_Name}. You are a Discord bot"}, {"role": "assistant", "content": "K"}]
 pre_prompt_extra = [{"role": "user", "content": "Your purpose is to answer user inputs mainly in a gay, sarcastic and snarky way and answer with quirky emojies"}, {"role": "assistant", "content": " SLAAAYYY 💅🤖"}]
@@ -365,7 +364,7 @@ async def twerk(ctx):
     # Send the custom emoji in the same channel where the command was invoked
     await ctx.send(f'{custom_emoji}')
 
-
+"""
 @client.command()
 async def nico(ctx, n: int = 1, dm: str = "dm"):
     meme = "https://tenor.com/view/baldur%27s-gate-3-bg3-hop-on-hop-on-baldur%27s-gate-3-gif-17487511086028155053"
@@ -402,7 +401,7 @@ async def phasmo(ctx, n: int = 1):
         for x in range(n):
             await user_dm.send(content=meme + f"send from <@{ctx.author.id}>")
         await ctx.reply(f"Message was send {n} time(s) to the direct messages of <@{user_id}>")
-
+"""
 
 @client.command()
 async def ow(ctx, Klasse):
