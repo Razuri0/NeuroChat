@@ -33,8 +33,8 @@ Bot_Name = "NeuroChat"
 # GPT settings
 n, temperature, model, max_Tokens = 1, 0.8, AI, 2000
 
-pre_prompt_main = [{"role": "user", "content": f"You are {Bot_Name}. You are a Discord bot"}, {"role": "assistant", "content": "K"}]
-pre_prompt_extra = [{"role": "user", "content": "Your purpose is to answer user inputs mainly in a gay, sarcastic and snarky way and answer with quirky emojies"}, {"role": "assistant", "content": " SLAAAYYY 💅🤖"}]
+pre_prompt_main = [{"role": "user", "content": f"You're name is {Bot_Name}. You are a Discord bot"}, {"role": "assistant", "content": "k"},
+                {"role": "user", "content": "Your purpose is to answer user inputs mainly in a furry, sarcastic and snarky way and answer with quirky emojies"}, {"role": "assistant", "content": " SLAAAYYY~~ :3"},]
 
 # Music settings
 
@@ -94,13 +94,6 @@ def messages_2_GPT_input(messages: list):
 async def on_ready():
     print(f"Bot logged in as {client.user}")
 
-    razurio_id = 265619616284409856
-    guild_id = 727981207068999722
-    guild = client.get_guild(guild_id)
-    member = guild.get_member(razurio_id)  # Fetch the Member object
-    await client.change_presence(status=member.status, activity=None)
-    # await check_time_on_server.start()
-
 
 @client.event   # leaves when alone in voicechannel
 async def on_voice_state_update(member, before, after):
@@ -110,7 +103,7 @@ async def on_voice_state_update(member, before, after):
     if len(voice_state.channel.members) == 1:
         await voice_state.disconnect()
 
-
+"""
 @client.event
 async def on_presence_update(before, after):
     member_ids = [1162100183912423515, 1169684429178945647]
@@ -132,7 +125,7 @@ async def on_presence_update(before, after):
             await client.change_presence(status=discord.Status.offline, activity=None)
         else:
             await client.change_presence(status=discord.Status.online, activity=None)
-
+"""
 
 
 """
@@ -368,7 +361,7 @@ async def twerk(ctx):
 @client.command()
 async def nico(ctx, n: int = 1, dm: str = "dm"):
     meme = "https://tenor.com/view/baldur%27s-gate-3-bg3-hop-on-hop-on-baldur%27s-gate-3-gif-17487511086028155053"
-    user_id = 274191678792007690
+    user_id = 
     user = f"<@{user_id}>"
     user_dm = await client.fetch_user(user_id)
     if dm == "dm":
@@ -384,7 +377,7 @@ async def nico(ctx, n: int = 1, dm: str = "dm"):
 @client.command()
 async def bg3(ctx, n: int = 1):
     meme = "https://tenor.com/view/baldur%27s-gate-3-bg3-hop-on-hop-on-baldur%27s-gate-3-gif-17487511086028155053"
-    user_ids = [274191678792007690, 620701343690260480]
+    user_ids = []
     for user_id in user_ids:
         user_dm = await client.fetch_user(user_id)
         for x in range(n):
@@ -395,7 +388,7 @@ async def bg3(ctx, n: int = 1):
 @client.command()
 async def phasmo(ctx, n: int = 1):
     meme = "https://tenor.com/view/phasmophobia-phasmo-oooo4-gaming-video-game-gif-26823894"
-    user_ids = [529766687738691606, 620701343690260480]
+    user_ids = []
     for user_id in user_ids:
         user_dm = await client.fetch_user(user_id)
         for x in range(n):
@@ -422,6 +415,9 @@ async def ow(ctx, Klasse):
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # ---Music bot---
+
+# this whole section is ass but kept for reference
+
 """
 
 @client.command()
@@ -693,33 +689,30 @@ async def chat(ctx, *, message=""):
     message_id = ctx.message.id
     message = await ctx.channel.fetch_message(message_id)
     messages = [message]
-    # message = await ctx.channel.fetch_message(message_id)
     while message.reference is not None:
         message = await ctx.channel.fetch_message(message.reference.message_id)
         messages.append(message)
     messages.reverse()
     if model == "gpt-5-nano":
         GPT_Prompts = messages_2_GPT_input(messages)
-        # answer = GPT_completion(GPT_Prompts, API, model, temperature, n, max_Tokens)
         try:
-            answer = await GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main, pre_prompt_extra)
+            answer = await GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
 
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (0.05 / 10**6) * 100 + answer.usage.output_tokens * (0.4 / 10**6) * 100, 5)}¢")
         except:
-            await ctx.reply(f"Uh oh noo~! >w< There's a widdle problemo... The bot seems to be a wittle broke :'(")
+            await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
     elif model == "gpt-5":
         GPT_Prompts = messages_2_GPT_input(messages)
-        # answer = GPT_completion(GPT_Prompts, API, model, temperature, n, max_Tokens)
         try:
-            answer = await GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main, pre_prompt_extra)
+            answer = await GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
 
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (1.25 / 10**6) * 100 + answer.usage.output_tokens * (10 / 10**6) * 100, 5)}¢")
         except:
-            await ctx.reply(f"Uh oh noo~! >w< There's a widdle problemo... The bot seems to be a wittle broke :'(")
+            await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
 
 
-async def GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main, pre_prompt_extra):
-    return GPT_completion(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main, pre_prompt_extra)
+async def GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
+    return GPT_completion(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
 
 
 client.run(key)
