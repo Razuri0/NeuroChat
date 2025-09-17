@@ -161,7 +161,7 @@ async def on_message(ctx):
         await ctx.reply("!!! HURENSOHN MENTIONED !!! \n https://imgur.com/a/nPpCoXn")
 
     # Lubo TTS
-    if (ctx.channel.id == 1340411406582808636 and (ctx.author.id == 268760914327633930 or ctx.author.id == 265619616284409856 or ctx.author.id == 620701343690260480)) or ctx.channel.id == 1085913010524143727 and not ctx.author.id == client.user.id:
+    if ctx.channel.id == 1340411406582808636:
         # Check if the user is in a voice channel
         if ctx.author.voice and ctx.author.voice.channel:
             voice_channel = ctx.author.voice.channel
