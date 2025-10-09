@@ -2,7 +2,7 @@ import os
 from mistralai import Mistral
 
 def mistral_completion(api, messages, model="mistral-small-2407", max_tokens=100):
-    client = Mistral()
+    client = Mistral(api_key=api)
     response = client.chat.completions.create(
         model=model,
         messages=[
