@@ -714,6 +714,7 @@ async def chat(ctx, *, message=""):
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
     elif model == "mistral-small-2407":
+        print(mistral_key)
         answer = await mistral(Prompts, mistral_key, model, max_Tokens)
 
         await ctx.reply(f"{answer}")
