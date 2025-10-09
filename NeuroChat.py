@@ -721,7 +721,7 @@ async def chat(ctx, *, message=""):
 async def GPT(Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
     return GPT_completion(Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
 
-async def mistral(Prompts, API, model, max_Tokens):
+async def mistral(API, Prompts, model, max_Tokens):
     return mistral_completion(API, Prompts, model, max_Tokens)
 
 
