@@ -718,14 +718,11 @@ async def chat(ctx, *, message=""):
 
         await ctx.reply(f"{answer}")
 
-async def GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
-    return GPT_completion(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
+async def GPT(Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
+    return GPT_completion(Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
 
-async def mistral(GPT_Prompts, API, model, max_Tokens):
-    messages = ""
-    for i in GPT_Prompts:
-        messages += i["content"] + "\n"
-    return mistral_completion(API, messages, model, max_Tokens)
+async def mistral(Prompts, API, model, max_Tokens):
+    return mistral_completion(API, Prompts, model, max_Tokens)
 
 
 client.run(discord_key)
