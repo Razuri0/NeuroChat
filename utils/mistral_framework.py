@@ -6,7 +6,7 @@ def mistral_completion(api, messages, model="mistral-small-2407", max_tokens=100
     response = client.chat.completions.create(
         model=model,
         messages=[
-            {"role": "user", "content": messages}
+            messages
         ],
         max_tokens=max_tokens
     )
@@ -14,6 +14,9 @@ def mistral_completion(api, messages, model="mistral-small-2407", max_tokens=100
 
 
 if __name__ == "__main__":
+    with open("../mistral_key", "r") as file:
+        mistral_key = file.read().strip()
+    prompt = input("Input: ")
     messages = [{"role": "user", "content": prompt}]
-    response = mistral_completion(messages=messages, api=os.getenv("MISTRAL_API_KEY"))
+    response = mistral_completion(messages=messages, api=mistral_key)
     print(f'Mistral: {response}\n')

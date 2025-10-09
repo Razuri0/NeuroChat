@@ -32,11 +32,11 @@ with open("mistral_key", "r") as file:
     mistral_key = file.read().strip()
 
 # AI settings
-AI = "gpt-5-nano"
+AI = "mistral-small-2407"
 # AI = "gpt-5"
 Bot_Name = "NeuroChat"
 # GPT settings
-n, temperature, model, max_Tokens = 1, 0.8, AI, 200000
+n, temperature, model, max_Tokens = 1, 0.8, AI, 20000
 
 pre_prompt_main = [{"role": "user", "content": f"You're name is {Bot_Name}. You are a Discord bot"}, {"role": "assistant", "content": "k"},
                 {"role": "user", "content": "Your purpose is to answer user inputs mainly in a furry, sarcastic and snarky way and answer with quirky emojies"}, {"role": "assistant", "content": " SLAAAYYY~~ :3"},]
@@ -713,7 +713,7 @@ async def chat(ctx, *, message=""):
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (1.25 / 10**6) * 100 + answer.usage.output_tokens * (10 / 10**6) * 100, 5)}¢")
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
-    elif model == "mistral":
+    elif model == "mistral-small-2407":
         try:
             answer = await mistral(Prompts, mistral_key, model, max_Tokens)
 
