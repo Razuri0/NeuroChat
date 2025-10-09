@@ -1,4 +1,5 @@
 from utils.GPT_Bot_Framework import GPT_completion
+from utils.mistral_framework import mistral_completion
 import discord
 from discord.ext import commands, tasks
 from utils.youtube_downloader import yt_downloader
@@ -20,11 +21,15 @@ client = commands.Bot(command_prefix=Prefix, intents=intents)
 
 # Discord API key
 with open("discord_key", "r") as file:
-    key = file.read().strip()
+    discord_key = file.read().strip()
 
 # OpenAI API key
 with open("openai_key", "r") as file:
-    API = file.read().strip()
+    openai_key = file.read().strip()
+
+# Mistral API key
+with open("mistral_key", "r") as file:
+    mistral_key = file.read().strip()
 
 # AI settings
 AI = "gpt-5-nano"
@@ -77,16 +82,16 @@ def uwufy(text) -> str:
     return text
 
 
-def messages_2_GPT_input(messages: list):
-    gpt_input = []
+def messages_2_prompt(messages: list):
+    prompt = []
     for i in messages:
         if i.author.id == client.user.id:
             # Bot message
-            gpt_input.append({"role": "assistant", "content": scheiße_entfernen(i.content)})
+            prompt.append({"role": "assistant", "content": scheiße_entfernen(i.content)})
         else:
             # User message
-            gpt_input.append({"role": "user", "content": scheiße_entfernen(i.content)})
-    return gpt_input
+            prompt.append({"role": "user", "content": scheiße_entfernen(i.content)})
+    return prompt
 
 
 
@@ -693,26 +698,38 @@ async def chat(ctx, *, message=""):
         message = await ctx.channel.fetch_message(message.reference.message_id)
         messages.append(message)
     messages.reverse()
+    Prompts = messages_2_prompt(messages)
     if model == "gpt-5-nano":
-        GPT_Prompts = messages_2_GPT_input(messages)
         try:
-            answer = await GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
+            answer = await GPT(Prompts, openai_key, model, temperature, n, max_Tokens, pre_prompt_main)
 
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (0.05 / 10**6) * 100 + answer.usage.output_tokens * (0.4 / 10**6) * 100, 5)}¢")
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
     elif model == "gpt-5":
-        GPT_Prompts = messages_2_GPT_input(messages)
         try:
-            answer = await GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
+            answer = await GPT(Prompts, openai_key, model, temperature, n, max_Tokens, pre_prompt_main)
 
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (1.25 / 10**6) * 100 + answer.usage.output_tokens * (10 / 10**6) * 100, 5)}¢")
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
+    elif model == "mistral":
+        try:
+            answer = await mistral(Prompts, mistral_key, model, max_Tokens)
 
+            await ctx.reply(f"{answer}")
+        except:
+            await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
+        
 
 async def GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
     return GPT_completion(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
 
+async def mistral(GPT_Prompts, API, model, max_Tokens):
+    messages = ""
+    for i in GPT_Prompts:
+        messages += i["content"] + "\n"
+    return mistral_completion(API, messages, model, max_Tokens)
 
-client.run(key)
+
+client.run(discord_key)

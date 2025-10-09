@@ -5,3 +5,4 @@ ffmpeg
 matplotlib
 gtts
 pynacl
+mistralai
