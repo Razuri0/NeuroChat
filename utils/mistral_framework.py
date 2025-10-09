@@ -9,4 +9,4 @@ def mistral_completion(api, messages, model="mistral-small-2407", max_tokens=100
         messages,
         max_tokens=max_tokens
     )
-    return response.choices[0].message['content']
+    return response.choices[0].message.content
