@@ -714,13 +714,9 @@ async def chat(ctx, *, message=""):
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
     elif model == "mistral-small-2407":
-        try:
-            answer = await mistral(Prompts, mistral_key, model, max_Tokens)
+        answer = await mistral(Prompts, mistral_key, model, max_Tokens)
 
-            await ctx.reply(f"{answer}")
-        except:
-            await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
-        
+        await ctx.reply(f"{answer}")
 
 async def GPT(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
     return GPT_completion(GPT_Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
