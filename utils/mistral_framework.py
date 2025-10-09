@@ -13,10 +13,12 @@ def mistral_completion(api, messages, model="mistral-small-2407", max_tokens=100
     return response.choices[0].message['content']
 
 
-if __name__ == "__main__":
+def main():
     with open("../mistral_key", "r") as file:
         mistral_key = file.read().strip()
-    prompt = input("Input: ")
+    prompt = "test"
     messages = [{"role": "user", "content": prompt}]
     response = mistral_completion(messages=messages, api=mistral_key)
     print(f'Mistral: {response}\n')
+
+main()
