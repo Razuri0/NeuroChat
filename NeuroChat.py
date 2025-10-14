@@ -32,7 +32,7 @@ with open("mistral_key", "r") as file:
     mistral_key = file.read().strip()
 
 # AI settings
-AI = "mistral-small-2407"
+AI = "mistral-small-latest"
 # AI = "gpt-5"
 Bot_Name = "NeuroChat"
 # GPT settings
@@ -713,7 +713,7 @@ async def chat(ctx, *, message=""):
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (1.25 / 10**6) * 100 + answer.usage.output_tokens * (10 / 10**6) * 100, 5)}¢")
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
-    elif model == "mistral-small-2407":
+    elif model == "mistral-small-latest":
         answer = await mistral(mistral_key, Prompts, model, max_Tokens)
 
         await ctx.reply(f"{answer}")
