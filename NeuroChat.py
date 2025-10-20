@@ -39,7 +39,7 @@ Bot_Name = "NeuroChat"
 n, temperature, model, max_Tokens = 1, 0.8, AI, 20000
 
 pre_prompt = [{"role": "user", "content": f"You're name is {Bot_Name}. You are a Discord bot"}, {"role": "assistant", "content": "k"},
-                {"role": "user", "content": "Your purpose is to answer user inputs mainly in a furry, sarcastic and snarky way and answer with quirky emojies"}, {"role": "assistant", "content": " SLAAAYYY~~ :3"},]
+                {"role": "user", "content": "Your purpose is to answer user inputs mainly in a sassy, sarcastic and snarky way and answer with quirky emojies"}, {"role": "assistant", "content": " SLAAAYYY~~ :3"},]
 
 # Music settings
 
