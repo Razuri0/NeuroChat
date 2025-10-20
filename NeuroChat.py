@@ -723,7 +723,7 @@ async def GPT(Prompts, API, model, temperature, n, max_Tokens, pre_prompt):
     return GPT_completion(Prompts, API, model, temperature, n, max_Tokens, pre_prompt)
 
 async def mistral(API, Prompts, model, max_Tokens, pre_prompt):
-    return mistral_completion(API, Prompts, model, max_Tokens)
+    return mistral_completion(API, Prompts, model, max_Tokens, pre_prompt)
 
 
 client.run(discord_key)
