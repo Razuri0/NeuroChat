@@ -1,7 +1,7 @@
 import os
 from mistralai import Mistral
 
-def mistral_completion(api, messages, model="mistral-small-latest", max_tokens=100, pre_prompt=""):
+def mistral_completion(api, messages, model, max_tokens, pre_prompt):
     prompt = pre_prompt + messages
     client = Mistral(api_key=api)
     response = client.chat.complete(
