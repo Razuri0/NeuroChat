@@ -28,7 +28,7 @@ with open("openai_key", "r") as file:
     openai_key = file.read().strip()
 
 # Mistral API key
-with open("key", "r") as file:
+with open("mistral_key", "r") as file:
     mistral_key = file.read().strip()
 
 # AI settings
