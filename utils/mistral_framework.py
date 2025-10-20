@@ -1,11 +1,11 @@
 import os
 from mistralai import Mistral
 
-def mistral_completion(api, messages, model="mistral-small-latest", max_tokens=100):
+def mistral_completion(api, messages, model="mistral-small-latest", max_tokens=100, pre_prompt=""):
     client = Mistral(api_key=api)
     response = client.chat.complete(
         model=model,
-        messages=messages,
+        messages=pre_prompt + messages,
         max_tokens=max_tokens
     )
     return response.choices[0].message.content

@@ -38,7 +38,7 @@ Bot_Name = "NeuroChat"
 # GPT settings
 n, temperature, model, max_Tokens = 1, 0.8, AI, 20000
 
-pre_prompt_main = [{"role": "user", "content": f"You're name is {Bot_Name}. You are a Discord bot"}, {"role": "assistant", "content": "k"},
+pre_prompt = [{"role": "user", "content": f"You're name is {Bot_Name}. You are a Discord bot"}, {"role": "assistant", "content": "k"},
                 {"role": "user", "content": "Your purpose is to answer user inputs mainly in a furry, sarcastic and snarky way and answer with quirky emojies"}, {"role": "assistant", "content": " SLAAAYYY~~ :3"},]
 
 # Music settings
@@ -701,14 +701,14 @@ async def chat(ctx, *, message=""):
     Prompts = messages_2_prompt(messages)
     if model == "gpt-5-nano":
         try:
-            answer = await GPT(Prompts, openai_key, model, temperature, n, max_Tokens, pre_prompt_main)
+            answer = await GPT(Prompts, openai_key, model, temperature, n, max_Tokens, pre_prompt)
 
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (0.05 / 10**6) * 100 + answer.usage.output_tokens * (0.4 / 10**6) * 100, 5)}¢")
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
     elif model == "gpt-5":
         try:
-            answer = await GPT(Prompts, openai_key, model, temperature, n, max_Tokens, pre_prompt_main)
+            answer = await GPT(Prompts, openai_key, model, temperature, n, max_Tokens, pre_prompt)
 
             await ctx.reply(f"{answer.output_text}\nAI Cost: {round(answer.usage.input_tokens * (1.25 / 10**6) * 100 + answer.usage.output_tokens * (10 / 10**6) * 100, 5)}¢")
         except:
@@ -716,13 +716,13 @@ async def chat(ctx, *, message=""):
     elif model == "mistral-small-latest":
         if not mistral_key:
             raise ValueError("Missing Mistral API key.")
-        answer = await mistral(mistral_key, Prompts, model, max_Tokens)
+        answer = await mistral(mistral_key, Prompts, model, max_Tokens, pre_prompt)
         await ctx.reply(f"{answer}")
 
-async def GPT(Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
-    return GPT_completion(Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main)
+async def GPT(Prompts, API, model, temperature, n, max_Tokens, pre_prompt):
+    return GPT_completion(Prompts, API, model, temperature, n, max_Tokens, pre_prompt)
 
-async def mistral(API, Prompts, model, max_Tokens):
+async def mistral(API, Prompts, model, max_Tokens, pre_prompt):
     return mistral_completion(API, Prompts, model, max_Tokens)
 
 
