@@ -28,7 +28,7 @@ with open("openai_key", "r") as file:
     openai_key = file.read().strip()
 
 # Mistral API key
-with open("mistral_key", "r") as file:
+with open("key", "r") as file:
     mistral_key = file.read().strip()
 
 # AI settings
@@ -717,7 +717,6 @@ async def chat(ctx, *, message=""):
         if not mistral_key:
             raise ValueError("Missing Mistral API key.")
         answer = await mistral(mistral_key, Prompts, model, max_Tokens)
-
         await ctx.reply(f"{answer}")
 
 async def GPT(Prompts, API, model, temperature, n, max_Tokens, pre_prompt_main):
