@@ -98,7 +98,6 @@ def messages_2_prompt(messages: list):
 @client.event
 async def on_ready():
     print(f"Bot logged in as {client.user}")
-    print(mistral_key)
 
 
 @client.event   # leaves when alone in voicechannel
@@ -715,6 +714,7 @@ async def chat(ctx, *, message=""):
         except:
             await ctx.reply(uwufy("Uh noo! There seems to be a problem... The bot is a little broken"))
     elif model == "mistral-small-latest":
+        print(mistral_key)
         answer = await mistral(mistral_key, Prompts, model, max_Tokens)
 
         await ctx.reply(f"{answer}")
