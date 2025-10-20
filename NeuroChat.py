@@ -30,7 +30,6 @@ with open("openai_key", "r") as file:
 # Mistral API key
 with open("mistral_key", "r") as file:
     mistral_key = file.read().strip()
-print(mistral_key)
 
 # AI settings
 AI = "mistral-small-latest"
@@ -99,6 +98,7 @@ def messages_2_prompt(messages: list):
 @client.event
 async def on_ready():
     print(f"Bot logged in as {client.user}")
+    print(mistral_key)
 
 
 @client.event   # leaves when alone in voicechannel
