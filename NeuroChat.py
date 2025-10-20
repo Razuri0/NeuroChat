@@ -30,6 +30,7 @@ with open("openai_key", "r") as file:
 # Mistral API key
 with open("mistral_key", "r") as file:
     mistral_key = file.read().strip()
+print(mistral_key)
 
 # AI settings
 AI = "mistral-small-latest"
