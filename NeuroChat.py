@@ -2,7 +2,6 @@ from utils.GPT_Bot_Framework import GPT_completion
 from utils.mistral_framework import mistral_completion
 import discord
 from discord.ext import commands, tasks
-from utils.youtube_downloader import yt_downloader
 import re
 import random
 import asyncio
