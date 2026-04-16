@@ -6,3 +6,4 @@ matplotlib
 gtts
 pynacl
 mistralai
+'discord.py[voice]' -U
